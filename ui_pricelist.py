@@ -4,13 +4,20 @@ from tkinter import ttk, messagebox
 import db
 from scrollable_tab import make_scrollable_tab
 
+def fmt_price(amount):
+    val = int(round(amount))
+    s = f"{val:,}".replace(",", " ")
+    return f"{s} руб."
+
 def build_pricelist_tab(parent):
     frame = make_scrollable_tab(parent)
-    frame.columnconfigure(0, weight=1); frame.columnconfigure(1, weight=1)
+    frame.columnconfigure(0, weight=0)
+    frame.columnconfigure(1, weight=1)
+    frame.rowconfigure(0, weight=1)
 
-    # Фильтры
+    # панель поиска слева
     filt = ttk.LabelFrame(frame, text="Поиск", padding=20)
-    filt.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+    filt.grid(row=0, column=0, padx=10, pady=10, sticky="nw")
     filt.columnconfigure(1, weight=1)
 
     ttk.Label(filt, text="Марка:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
@@ -37,11 +44,16 @@ def build_pricelist_tab(parent):
         except ValueError:
             return messagebox.showerror("Ошибка","Неверный формат цены")
         rows = db.search_products(cid, model_q.get(), mn, mx)
-        for i in tree.get_children(): tree.delete(i)
+        for iid in tree.get_children():
+            tree.delete(iid)
         for r in rows:
-            tree.insert("",tk.END,values=(
-                r["id"], r["category"], r["name"], r["price"],
-                "✔" if r["published"] else "", "Да" if r["used"] else "Нет"
+            tree.insert("", "end", values=(
+                r["id"],
+                r["category"],
+                r["name"],
+                fmt_price(r["price"]),  # <- форматируем цену
+                "✔" if r["published"] else "",
+                "Да" if r["used"] else "Нет"
             ))
 
     ttk.Button(filt, text="Поиск", command=on_search).grid(row=4, column=0, columnspan=2, pady=10)
@@ -50,12 +62,21 @@ def build_pricelist_tab(parent):
     res = ttk.LabelFrame(frame, text="Результаты", padding=20)
     res.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
     res.columnconfigure(0, weight=1)
+    res.rowconfigure(0, weight=1)
 
-    cols = ("ID","Марка","Модель","Цена","Опублик.","Подерж.")
-    tree = ttk.Treeview(res, columns=cols, show="headings")
-    for c in cols:
-        tree.heading(c,text=c); tree.column(c,anchor="center")
-    tree.grid(row=0,column=0,sticky="nsew")
+    cols = ("ID", "Марка", "Модель", "Цена", "Опубл.", "Подерж.")
+    tree = ttk.Treeview(res, columns=cols, show="headings", height=12)
+    vsb = ttk.Scrollbar(res, orient="vertical", command=tree.yview)
+    hsb = ttk.Scrollbar(res, orient="horizontal", command=tree.xview)
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+    widths = [50, 120, 200, 100, 80, 80]
+    for c, w in zip(cols, widths):
+        tree.heading(c, text=c)
+        tree.column(c, width=w, anchor="center", stretch=False)
+
+    tree.grid(row=0, column=0, sticky="nsew")
+    vsb.grid(row=0, column=1, sticky="ns")
+    hsb.grid(row=1, column=0, sticky="ew")
 
     def on_update():
         sel = tree.selection()
@@ -80,6 +101,7 @@ def build_pricelist_tab(parent):
         db.publish_product(pid, True)
         messagebox.showinfo("OK","Опубликовано"); on_search()
 
-    btnf = ttk.Frame(res); btnf.grid(row=1,column=0,pady=10)
-    ttk.Button(btnf,text="Обновить цену", command=on_update).pack(side="left", padx=5)
-    ttk.Button(btnf,text="Опубликовать",  command=on_publish).pack(side="left", padx=5)
+    btnf = ttk.Frame(res)
+    btnf.grid(row=2, column=0, pady=10, sticky="e")
+    ttk.Button(btnf, text="Обновить цену", command=on_update).pack(side="left", padx=5)
+    ttk.Button(btnf, text="Опубликовать", command=on_publish).pack(side="left", padx=5)

@@ -1,45 +1,62 @@
 # ui_clients.py
-import tkinter as tk
 from tkinter import ttk, messagebox
 import db
 from scrollable_tab import make_scrollable_tab
 
 def build_client_tab(parent):
     frame = make_scrollable_tab(parent)
-    frame.columnconfigure(0, weight=1); frame.columnconfigure(1, weight=1)
+    frame.columnconfigure(0, weight=0)
+    frame.columnconfigure(1, weight=1)
+    frame.rowconfigure(0, weight=1)
 
-    form = ttk.LabelFrame(frame, text="Клиент", padding=20)
-    form.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+    form = ttk.LabelFrame(frame, text="Добавление клиента", padding=20)
+    form.grid(row=0, column=0, padx=10, pady=10, sticky="nw")
     form.columnconfigure(1, weight=1)
-
     ttk.Label(form, text="Имя:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
-    name = ttk.Entry(form); name.grid(row=0, column=1, sticky="ew", padx=5, pady=5)
-
+    name_e = ttk.Entry(form)
+    name_e.grid(row=0, column=1, sticky="ew", padx=5, pady=5)
     ttk.Label(form, text="Телефон:").grid(row=1, column=0, sticky="e", padx=5, pady=5)
-    phone = ttk.Entry(form); phone.grid(row=1, column=1, sticky="ew", padx=5, pady=5)
-
+    phone_e = ttk.Entry(form)
+    phone_e.grid(row=1, column=1, sticky="ew", padx=5, pady=5)
     ttk.Label(form, text="Тип:").grid(row=2, column=0, sticky="e", padx=5, pady=5)
-    types = ["гость","покупатель","постоянный клиент"]
-    client_type = ttk.Combobox(form, values=types, state="readonly")
-    client_type.grid(row=2, column=1, sticky="ew", padx=5, pady=5)
+    cb_type = ttk.Combobox(form, values=["гость", "покупатель", "постоянный клиент"], state="readonly")
+    cb_type.grid(row=2, column=1, sticky="ew", padx=5, pady=5)
 
     def add():
-        n, p, t = name.get().strip(), phone.get().strip(), client_type.get()
-        if not (n and p and t):
-            return messagebox.showerror("Ошибка","Все поля обязательны")
-        db.add_client(n,p,t)
-        messagebox.showinfo("OK","Клиент добавлен")
-        name.delete(0,'end'); phone.delete(0,'end'); client_type.set("")
+        n, p, t = name_e.get().strip(), phone_e.get().strip(), cb_type.get()
+        if not (n and t):
+            return messagebox.showerror("Ошибка", "Имя и тип обязательны")
+        db.add_client(n, p, t)
+        refresh()
+        name_e.delete(0, 'end')
+        phone_e.delete(0, 'end')
+        cb_type.set("")
 
-    ttk.Button(form, text="Добавить", command=add).grid(row=3, column=0, columnspan=2, pady=15)
+    ttk.Button(form, text="Добавить", command=add).grid(row=3, column=0, columnspan=2, pady=10)
 
-    listf = ttk.LabelFrame(frame, text="Список клиентов", padding=20)
+    # ——— Таблица справа ———
+    listf = ttk.LabelFrame(frame, text="Список клиентов", padding=10)
     listf.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
     listf.columnconfigure(0, weight=1)
+    listf.rowconfigure(0, weight=1)
 
-    tree = ttk.Treeview(listf, columns=("ID","Имя","Тип"), show="headings")
-    for col in ("ID","Имя","Тип"):
-        tree.heading(col,text=col); tree.column(col,anchor="center")
+    cols = ("ID", "Имя", "Тип")
+    tree = ttk.Treeview(listf, columns=cols, show="headings", height=12)
+    vsb = ttk.Scrollbar(listf, orient="vertical", command=tree.yview)
+    hsb = ttk.Scrollbar(listf, orient="horizontal", command=tree.xview)
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+    widths = [50, 200, 150]
+    for c, w in zip(cols, widths):
+        tree.heading(c, text=c)
+        tree.column(c, width=w, anchor="center", stretch=False)
+
     tree.grid(row=0, column=0, sticky="nsew")
-    for r in db.get_clients():
-        tree.insert("",tk.END,values=(r["id"],r["name"],r["type"]))
+    vsb.grid(row=0, column=1, sticky="ns")
+    hsb.grid(row=1, column=0, sticky="ew")
+
+    def refresh():
+        for iid in tree.get_children(): tree.delete(iid)
+        for r in db.get_clients():
+            tree.insert("", "end", values=(r["id"], r["name"], r["type"]))
+
+    refresh()

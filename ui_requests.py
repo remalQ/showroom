@@ -67,14 +67,17 @@ def build_request_tab(parent):
     list_frame.rowconfigure(0, weight=1)
 
     cols = ("ID", "Клиент", "Сотрудник", "Услуга", "Дата", "Статус")
-    tree = ttk.Treeview(list_frame, columns=cols, show="headings")
-    vsb  = ttk.Scrollbar(list_frame, orient="vertical",   command=tree.yview)
-    hsb  = ttk.Scrollbar(list_frame, orient="horizontal", command=tree.xview)
+    # высота 12 строк
+    tree = ttk.Treeview(list_frame, columns=cols, show="headings", height=12)
+    vsb = ttk.Scrollbar(list_frame, orient="vertical", command=tree.yview)
+    hsb = ttk.Scrollbar(list_frame, orient="horizontal", command=tree.xview)
     tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
 
-    for c in cols:
+    # фиксируем ширины колонок
+    widths = [50, 120, 120, 180, 100, 100]
+    for c, w in zip(cols, widths):
         tree.heading(c, text=c)
-        tree.column(c, anchor="center", stretch=True)
+        tree.column(c, width=w, anchor="center", stretch=False)
 
     tree.grid(row=0, column=0, sticky="nsew")
     vsb.grid(row=0, column=1, sticky="ns")

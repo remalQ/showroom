@@ -4,6 +4,12 @@ from tkinter import ttk, messagebox
 import db
 from scrollable_tab import make_scrollable_tab
 
+def fmt_price(amount):
+    # Округляем до целых, разделяем пробелами
+    val = int(round(amount))
+    s = f"{val:,}".replace(",", " ")
+    return f"{s} руб."
+
 def build_product_tab(parent):
     frame = make_scrollable_tab(parent)
     # две колонки: левая — формы (фиксированная), правая — список (растягивается)
@@ -82,14 +88,17 @@ def build_product_tab(parent):
     list_frame.rowconfigure(0, weight=1)
 
     cols = ("ID", "Категория", "Название", "Цена", "Подерж.", "Опубл.")
-    tree = ttk.Treeview(list_frame, columns=cols, show="headings")
-    vsb  = ttk.Scrollbar(list_frame, orient="vertical",   command=tree.yview)
-    hsb  = ttk.Scrollbar(list_frame, orient="horizontal", command=tree.xview)
+    # задаём высоту в 12 строк
+    tree = ttk.Treeview(list_frame, columns=cols, show="headings", height=12)
+    vsb = ttk.Scrollbar(list_frame, orient="vertical", command=tree.yview)
+    hsb = ttk.Scrollbar(list_frame, orient="horizontal", command=tree.xview)
     tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
 
-    for c in cols:
+    # жёстко прописываем ширины колонок
+    widths = [50, 120, 200, 100, 80, 80]
+    for c, w in zip(cols, widths):
         tree.heading(c, text=c)
-        tree.column(c, anchor="center", stretch=True)
+        tree.column(c, width=w, anchor="center", stretch=False)
 
     tree.grid(row=0, column=0, sticky="nsew")
     vsb.grid(row=0, column=1, sticky="ns")
@@ -111,7 +120,7 @@ def build_product_tab(parent):
                 r["id"],
                 r["category"],
                 r["name"],
-                f"{r['price']:.2f}",
+                fmt_price(r["price"]),  # <- форматируем цену
                 "Да" if r["used"] else "Нет",
                 "Да" if r["published"] else "Нет"
             ))

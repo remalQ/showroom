@@ -11,6 +11,7 @@ from ui_sales     import build_sales_tab
 from ui_tradein   import build_tradein_tab
 from ui_products  import build_product_tab
 from ui_requests  import build_request_tab
+from ui_forecast  import build_forecast_tab
 
 def center_window(win, w, h):
     sw, sh = win.winfo_screenwidth(), win.winfo_screenheight()
@@ -54,6 +55,7 @@ def main():
         ("Клиенты",           lambda: open_section(root,"Клиенты",           build_client_tab)),
         ("Сотрудники",        lambda: open_section(root,"Сотрудники",        build_employee_tab)),
         ("Прайс-лист",        lambda: open_section(root,"Прайс-лист",        build_pricelist_tab)),
+        ("Прогноз выручки",   lambda: open_section(root, "Прогноз",          build_forecast_tab)),
         ("Продажи",           lambda: open_section(root,"Управление продажами", build_sales_tab)),
         ("Trade-IN",          lambda: open_section(root,"Trade-IN",          build_tradein_tab)),
         ("Товары/Каталог",    lambda: open_section(root,"Каталог товаров",   build_product_tab)),
