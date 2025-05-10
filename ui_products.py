@@ -1,68 +1,121 @@
+# ui_products.py
 import tkinter as tk
 from tkinter import ttk, messagebox
 import db
 from scrollable_tab import make_scrollable_tab
 
+def build_product_tab(parent):
+    frame = make_scrollable_tab(parent)
+    # две колонки: левая — формы (фиксированная), правая — список (растягивается)
+    frame.columnconfigure(0, weight=0)
+    frame.columnconfigure(1, weight=1)
+    # две строки: строка 0 — добавление категории, строка 1 — всё остальное
+    frame.rowconfigure(0, weight=0)
+    frame.rowconfigure(1, weight=1)
 
-def build_product_tab(tab):
-    frame = make_scrollable_tab(tab)
+    # ——— Добавление категории ———
+    cat_frame = ttk.LabelFrame(frame, text="Категории", padding=20)
+    cat_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+    cat_frame.columnconfigure(1, weight=1)
 
-    # --- Добавление товара ---
-    add_frame = ttk.LabelFrame(frame, text="Добавление товара", padding=20)
-    add_frame.grid(row=0, column=0, padx=20, pady=10)
+    ttk.Label(cat_frame, text="Название категории:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
+    ent_cat = ttk.Entry(cat_frame)
+    ent_cat.grid(row=0, column=1, sticky="ew", padx=5, pady=5)
 
-    categories = db.get_categories()
-    category_dict = {name: id for id, name in categories}
+    def add_category():
+        name = ent_cat.get().strip()
+        if not name:
+            return messagebox.showerror("Ошибка", "Введите название категории")
+        db.add_category(name)
+        messagebox.showinfo("ОК", "Категория добавлена")
+        ent_cat.delete(0, "end")
+        refresh()
 
-    ttk.Label(add_frame, text="Наименование:").grid(row=0, column=0, padx=10, pady=10, sticky="e")
-    name_entry = ttk.Entry(add_frame, width=30)
-    name_entry.grid(row=0, column=1, padx=10, pady=10)
+    ttk.Button(cat_frame, text="Добавить категорию", command=add_category)\
+        .grid(row=1, column=0, columnspan=2, pady=10)
 
-    ttk.Label(add_frame, text="Категория:").grid(row=1, column=0, padx=10, pady=10, sticky="e")
-    category_combo = ttk.Combobox(add_frame, values=list(category_dict.keys()), width=30)
-    category_combo.grid(row=1, column=1, padx=10, pady=10)
+    # ——— Добавление товара ———
+    prod_frame = ttk.LabelFrame(frame, text="Товары", padding=20)
+    prod_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+    prod_frame.columnconfigure(1, weight=1)
 
-    ttk.Label(add_frame, text="Цена:").grid(row=2, column=0, padx=10, pady=10, sticky="e")
-    price_entry = ttk.Entry(add_frame, width=30)
-    price_entry.grid(row=2, column=1, padx=10, pady=10)
+    ttk.Label(prod_frame, text="Категория:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
+    cb_cat = ttk.Combobox(prod_frame, state="readonly")
+    cb_cat.grid(row=0, column=1, sticky="ew", padx=5, pady=5)
+
+    ttk.Label(prod_frame, text="Название:").grid(row=1, column=0, sticky="e", padx=5, pady=5)
+    ent_name = ttk.Entry(prod_frame)
+    ent_name.grid(row=1, column=1, sticky="ew", padx=5, pady=5)
+
+    ttk.Label(prod_frame, text="Цена:").grid(row=2, column=0, sticky="e", padx=5, pady=5)
+    ent_price = ttk.Entry(prod_frame)
+    ent_price.grid(row=2, column=1, sticky="ew", padx=5, pady=5)
+
+    used_var = tk.BooleanVar()
+    ttk.Checkbutton(prod_frame, text="Подержанный", variable=used_var)\
+        .grid(row=3, column=0, columnspan=2, pady=5)
 
     def add_product():
+        cat = cb_cat.get()
+        name = ent_name.get().strip()
+        price = ent_price.get().strip()
+        used = used_var.get()
+        if not (cat and name and price):
+            return messagebox.showerror("Ошибка", "Все поля обязательны")
         try:
-            name = name_entry.get()
-            category = category_combo.get()
-            price = float(price_entry.get())
-            if not name or category not in category_dict:
-                raise ValueError("Неверные данные")
+            price = float(price)
+        except ValueError:
+            return messagebox.showerror("Ошибка", "Неверный формат цены")
+        db.add_product(name, cat_map[cat], price, used)
+        messagebox.showinfo("ОК", "Товар добавлен")
+        ent_name.delete(0, "end"); ent_price.delete(0, "end")
+        cb_cat.set(""); used_var.set(False)
+        refresh()
 
-            db.add_product(name, category_dict[category], price)
-            messagebox.showinfo("Успешно", "Товар добавлен")
-            name_entry.delete(0, tk.END)
-            price_entry.delete(0, tk.END)
-        except Exception as e:
-            messagebox.showerror("Ошибка", str(e))
+    ttk.Button(prod_frame, text="Добавить товар", command=add_product)\
+        .grid(row=4, column=0, columnspan=2, pady=10)
 
-    ttk.Button(add_frame, text="Добавить товар", command=add_product).grid(
-        row=3, column=0, columnspan=2, pady=20
-    )
+    # ——— Список товаров ———
+    list_frame = ttk.LabelFrame(frame, text="Список товаров", padding=20)
+    list_frame.grid(row=1, column=1, padx=10, pady=10, sticky="nsew")
+    list_frame.columnconfigure(0, weight=1)
+    list_frame.rowconfigure(0, weight=1)
 
-    # --- Поиск товара ---
-    search_frame = ttk.LabelFrame(frame, text="Поиск товаров", padding=20)
-    search_frame.grid(row=1, column=0, padx=20, pady=10)
+    cols = ("ID", "Категория", "Название", "Цена", "Подерж.", "Опубл.")
+    tree = ttk.Treeview(list_frame, columns=cols, show="headings")
+    vsb  = ttk.Scrollbar(list_frame, orient="vertical",   command=tree.yview)
+    hsb  = ttk.Scrollbar(list_frame, orient="horizontal", command=tree.xview)
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
 
-    ttk.Label(search_frame, text="Поиск по названию:").grid(row=0, column=0, padx=10, pady=10, sticky="e")
-    search_entry = ttk.Entry(search_frame, width=30)
-    search_entry.grid(row=0, column=1, padx=10, pady=10)
+    for c in cols:
+        tree.heading(c, text=c)
+        tree.column(c, anchor="center", stretch=True)
 
-    results_box = tk.Listbox(search_frame, width=70)
-    results_box.grid(row=2, column=0, columnspan=2, pady=10)
+    tree.grid(row=0, column=0, sticky="nsew")
+    vsb.grid(row=0, column=1, sticky="ns")
+    hsb.grid(row=1, column=0, sticky="ew")
 
-    def do_search():
-        query = search_entry.get()
-        results = db.search_products(query)
-        results_box.delete(0, tk.END)
-        for name, category, price in results:
-            results_box.insert(tk.END, f"{name} | {category} | {price:.2f} руб.")
+    def refresh():
+        # обновить категории
+        categories = db.get_categories()
+        names = [r["name"] for r in categories]
+        nonlocal cat_map
+        cat_map = {r["name"]: r["id"] for r in categories}
+        cb_cat["values"] = names
 
-    ttk.Button(search_frame, text="Найти", command=do_search).grid(
-        row=1, column=0, columnspan=2, pady=10
-    )
+        # обновить дерево товаров
+        for iid in tree.get_children():
+            tree.delete(iid)
+        for r in db.search_products():
+            tree.insert("", "end", values=(
+                r["id"],
+                r["category"],
+                r["name"],
+                f"{r['price']:.2f}",
+                "Да" if r["used"] else "Нет",
+                "Да" if r["published"] else "Нет"
+            ))
+
+    # первый запуск
+    cat_map = {}
+    refresh()
