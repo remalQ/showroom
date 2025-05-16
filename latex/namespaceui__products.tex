@@ -1,0 +1,48 @@
+\doxysection{ui\+\_\+products Namespace Reference}
+\hypertarget{namespaceui__products}{}\label{namespaceui__products}\index{ui\_products@{ui\_products}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespaceui__products_a23f3491677f731c5f112fd120de57e02}{fmt\+\_\+price}} (float amount)
+\item 
+None \mbox{\hyperlink{namespaceui__products_a4865a1671ef013f96ac63de8b0bf0c21}{build\+\_\+product\+\_\+tab}} (ttk.\+Frame parent)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file ui_products.py
+@brief Module to build and manage the products and categories tab in the Auto Showroom UI.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceui__products_a4865a1671ef013f96ac63de8b0bf0c21}\index{ui\_products@{ui\_products}!build\_product\_tab@{build\_product\_tab}}
+\index{build\_product\_tab@{build\_product\_tab}!ui\_products@{ui\_products}}
+\doxysubsubsection{\texorpdfstring{build\_product\_tab()}{build\_product\_tab()}}
+{\footnotesize\ttfamily \label{namespaceui__products_a4865a1671ef013f96ac63de8b0bf0c21} 
+ None ui\+\_\+products.\+build\+\_\+product\+\_\+tab (\begin{DoxyParamCaption}\item[{ttk.\+Frame}]{parent}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}\brief Construct the products and categories management interface.
+
+Creates a scrollable frame with:
+  - Category addition form.
+  - Product addition form.
+  - Table listing existing products.
+
+\param[in] parent The parent frame where the products tab is placed.
+\return None
+\end{DoxyVerb}
+ \Hypertarget{namespaceui__products_a23f3491677f731c5f112fd120de57e02}\index{ui\_products@{ui\_products}!fmt\_price@{fmt\_price}}
+\index{fmt\_price@{fmt\_price}!ui\_products@{ui\_products}}
+\doxysubsubsection{\texorpdfstring{fmt\_price()}{fmt\_price()}}
+{\footnotesize\ttfamily \label{namespaceui__products_a23f3491677f731c5f112fd120de57e02} 
+ str ui\+\_\+products.\+fmt\+\_\+price (\begin{DoxyParamCaption}\item[{float}]{amount}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}\brief Format a numeric price into a human-readable string.
+
+Rounds to nearest integer and adds thousand separators.
+
+\param[in] amount Price value as float.
+\return Formatted price string, e.g. "1 234 руб.".
+\end{DoxyVerb}
+ 

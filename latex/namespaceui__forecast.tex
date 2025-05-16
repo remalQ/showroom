@@ -1,0 +1,48 @@
+\doxysection{ui\+\_\+forecast Namespace Reference}
+\hypertarget{namespaceui__forecast}{}\label{namespaceui__forecast}\index{ui\_forecast@{ui\_forecast}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespaceui__forecast_a56a9be22088d48ebd0693f3acd3b1b96}{fmt\+\_\+price}} (float amount)
+\item 
+None \mbox{\hyperlink{namespaceui__forecast_a5ed4b2e4ae23b42ebb0b59a93cebac8a}{build\+\_\+forecast\+\_\+tab}} (ttk.\+Frame parent)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file ui_forecast.py
+@brief Module to build and manage the revenue forecast tab in the Auto Showroom UI.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceui__forecast_a5ed4b2e4ae23b42ebb0b59a93cebac8a}\index{ui\_forecast@{ui\_forecast}!build\_forecast\_tab@{build\_forecast\_tab}}
+\index{build\_forecast\_tab@{build\_forecast\_tab}!ui\_forecast@{ui\_forecast}}
+\doxysubsubsection{\texorpdfstring{build\_forecast\_tab()}{build\_forecast\_tab()}}
+{\footnotesize\ttfamily \label{namespaceui__forecast_a5ed4b2e4ae23b42ebb0b59a93cebac8a} 
+ None ui\+\_\+forecast.\+build\+\_\+forecast\+\_\+tab (\begin{DoxyParamCaption}\item[{ttk.\+Frame}]{parent}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}\brief Construct the revenue forecast interface.
+
+Creates a scrollable frame with:
+  - Controls to set the moving average window.
+  - Table showing actual and forecasted monthly revenue for 2025.
+  - Text area detailing the moving average calculations and accuracy metrics.
+
+\param[in] parent The parent frame where the forecast tab is placed.
+\return None
+\end{DoxyVerb}
+ \Hypertarget{namespaceui__forecast_a56a9be22088d48ebd0693f3acd3b1b96}\index{ui\_forecast@{ui\_forecast}!fmt\_price@{fmt\_price}}
+\index{fmt\_price@{fmt\_price}!ui\_forecast@{ui\_forecast}}
+\doxysubsubsection{\texorpdfstring{fmt\_price()}{fmt\_price()}}
+{\footnotesize\ttfamily \label{namespaceui__forecast_a56a9be22088d48ebd0693f3acd3b1b96} 
+ str ui\+\_\+forecast.\+fmt\+\_\+price (\begin{DoxyParamCaption}\item[{float}]{amount}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}\brief Format a numeric amount into a human-readable price string.
+
+Rounds to nearest integer and adds thousand separators.
+
+\param[in] amount Value to format.
+\return Formatted string, e.g. "1 234 руб.".
+\end{DoxyVerb}
+ 

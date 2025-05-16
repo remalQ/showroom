@@ -1,62 +1,150 @@
-# ui_clients.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+@file ui_clients.py
+@brief Module to build and manage the client tab in the Auto Showroom UI.
+"""
+
+import tkinter as tk
 from tkinter import ttk, messagebox
+
 import db
 from scrollable_tab import make_scrollable_tab
 
-def build_client_tab(parent):
-    frame = make_scrollable_tab(parent)
-    frame.columnconfigure(0, weight=0)
-    frame.columnconfigure(1, weight=1)
-    frame.rowconfigure(0, weight=1)
 
-    form = ttk.LabelFrame(frame, text="Добавление клиента", padding=20)
-    form.grid(row=0, column=0, padx=10, pady=10, sticky="nw")
-    form.columnconfigure(1, weight=1)
-    ttk.Label(form, text="Имя:").grid(row=0, column=0, sticky="e", padx=5, pady=5)
-    name_e = ttk.Entry(form)
-    name_e.grid(row=0, column=1, sticky="ew", padx=5, pady=5)
-    ttk.Label(form, text="Телефон:").grid(row=1, column=0, sticky="e", padx=5, pady=5)
-    phone_e = ttk.Entry(form)
-    phone_e.grid(row=1, column=1, sticky="ew", padx=5, pady=5)
-    ttk.Label(form, text="Тип:").grid(row=2, column=0, sticky="e", padx=5, pady=5)
-    cb_type = ttk.Combobox(form, values=["гость", "покупатель", "постоянный клиент"], state="readonly")
-    cb_type.grid(row=2, column=1, sticky="ew", padx=5, pady=5)
+def build_client_tab(parent: ttk.Frame) -> None:
+    """
+    \brief Construct the client management interface.
 
-    def add():
-        n, p, t = name_e.get().strip(), phone_e.get().strip(), cb_type.get()
-        if not (n and t):
-            return messagebox.showerror("Ошибка", "Имя и тип обязательны")
-        db.add_client(n, p, t)
-        refresh()
-        name_e.delete(0, 'end')
-        phone_e.delete(0, 'end')
-        cb_type.set("")
+    This function creates a scrollable frame containing a form to add new clients
+    and a table listing existing clients.
 
-    ttk.Button(form, text="Добавить", command=add).grid(row=3, column=0, columnspan=2, pady=10)
+    \param[in] parent The parent frame where the client tab should be placed.
+    \return None
+    """
+    container = make_scrollable_tab(parent)
+    container.columnconfigure(0, weight=0)
+    container.columnconfigure(1, weight=1)
+    container.rowconfigure(0, weight=1)
 
-    # ——— Таблица справа ———
-    listf = ttk.LabelFrame(frame, text="Список клиентов", padding=10)
-    listf.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
-    listf.columnconfigure(0, weight=1)
-    listf.rowconfigure(0, weight=1)
+    # --- Form to add a new client ---
+    form_frame = ttk.LabelFrame(
+        container,
+        text='Добавление клиента',
+        padding=20
+    )
+    form_frame.grid(row=0, column=0, padx=10, pady=10, sticky='nw')
+    form_frame.columnconfigure(1, weight=1)
 
-    cols = ("ID", "Имя", "Тип")
-    tree = ttk.Treeview(listf, columns=cols, show="headings", height=12)
-    vsb = ttk.Scrollbar(listf, orient="vertical", command=tree.yview)
-    hsb = ttk.Scrollbar(listf, orient="horizontal", command=tree.xview)
-    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
-    widths = [50, 200, 150]
-    for c, w in zip(cols, widths):
-        tree.heading(c, text=c)
-        tree.column(c, width=w, anchor="center", stretch=False)
+    ttk.Label(form_frame, text='Имя:').grid(
+        row=0, column=0, sticky='e', padx=5, pady=5
+    )
+    entry_name = ttk.Entry(form_frame)
+    entry_name.grid(row=0, column=1, sticky='ew', padx=5, pady=5)
 
-    tree.grid(row=0, column=0, sticky="nsew")
-    vsb.grid(row=0, column=1, sticky="ns")
-    hsb.grid(row=1, column=0, sticky="ew")
+    ttk.Label(form_frame, text='Телефон:').grid(
+        row=1, column=0, sticky='e', padx=5, pady=5
+    )
+    entry_phone = ttk.Entry(form_frame)
+    entry_phone.grid(row=1, column=1, sticky='ew', padx=5, pady=5)
 
-    def refresh():
-        for iid in tree.get_children(): tree.delete(iid)
-        for r in db.get_clients():
-            tree.insert("", "end", values=(r["id"], r["name"], r["type"]))
+    ttk.Label(form_frame, text='Тип:').grid(
+        row=2, column=0, sticky='e', padx=5, pady=5
+    )
+    combobox_type = ttk.Combobox(
+        form_frame,
+        values=['гость', 'покупатель', 'постоянный клиент'],
+        state='readonly'
+    )
+    combobox_type.grid(row=2, column=1, sticky='ew', padx=5, pady=5)
 
-    refresh()
+    def add_client_callback() -> None:
+        """
+        \brief Handle adding a new client via the form inputs.
+
+        Validates input fields, inserts a new client into the database,
+        and refreshes the client list.
+        """
+        name = entry_name.get().strip()
+        phone = entry_phone.get().strip()
+        client_type = combobox_type.get()
+
+        if not name or not client_type:
+            messagebox.showerror('Ошибка', 'Имя и тип обязательны')
+            return
+
+        db.add_client(name, phone, client_type)
+        _refresh_client_list()
+
+        entry_name.delete(0, tk.END)
+        entry_phone.delete(0, tk.END)
+        combobox_type.set('')
+
+    add_button = ttk.Button(
+        form_frame,
+        text='Добавить',
+        command=add_client_callback
+    )
+    add_button.grid(row=3, column=0, columnspan=2, pady=10)
+
+    # --- Table listing existing clients ---
+    list_frame = ttk.LabelFrame(
+        container,
+        text='Список клиентов',
+        padding=10
+    )
+    list_frame.grid(row=0, column=1, padx=10, pady=10, sticky='nsew')
+    list_frame.columnconfigure(0, weight=1)
+    list_frame.rowconfigure(0, weight=1)
+
+    columns = ('ID', 'Имя', 'Тип')
+    tree = ttk.Treeview(
+        list_frame,
+        columns=columns,
+        show='headings',
+        height=12
+    )
+    scrollbar_v = ttk.Scrollbar(
+        list_frame,
+        orient='vertical',
+        command=tree.yview
+    )
+    scrollbar_h = ttk.Scrollbar(
+        list_frame,
+        orient='horizontal',
+        command=tree.xview
+    )
+    tree.configure(
+        yscrollcommand=scrollbar_v.set,
+        xscrollcommand=scrollbar_h.set
+    )
+
+    column_widths = [50, 200, 150]
+    for col, width in zip(columns, column_widths):
+        tree.heading(col, text=col)
+        tree.column(
+            col,
+            width=width,
+            anchor='center',
+            stretch=False
+        )
+
+    tree.grid(row=0, column=0, sticky='nsew')
+    scrollbar_v.grid(row=0, column=1, sticky='ns')
+    scrollbar_h.grid(row=1, column=0, sticky='ew')
+
+    def _refresh_client_list() -> None:
+        """
+        \brief Reload and display all clients in the treeview.
+        """
+        for item in tree.get_children():
+            tree.delete(item)
+
+        for row in db.get_clients():
+            tree.insert(
+                '',
+                tk.END,
+                values=(row['id'], row['name'], row['type'])
+            )
+
+    _refresh_client_list()

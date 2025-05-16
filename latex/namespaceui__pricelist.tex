@@ -1,0 +1,44 @@
+\doxysection{ui\+\_\+pricelist Namespace Reference}
+\hypertarget{namespaceui__pricelist}{}\label{namespaceui__pricelist}\index{ui\_pricelist@{ui\_pricelist}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespaceui__pricelist_ad9f6f9deeca70c71b6796eeb0d1dd4e5}{fmt\+\_\+price}} (float amount)
+\item 
+None \mbox{\hyperlink{namespaceui__pricelist_a8edc5912b97b7409c63967a7d724a851}{build\+\_\+pricelist\+\_\+tab}} (ttk.\+Frame parent)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file ui_pricelist.py
+@brief Module to build and manage the price list tab in the Auto Showroom UI.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceui__pricelist_a8edc5912b97b7409c63967a7d724a851}\index{ui\_pricelist@{ui\_pricelist}!build\_pricelist\_tab@{build\_pricelist\_tab}}
+\index{build\_pricelist\_tab@{build\_pricelist\_tab}!ui\_pricelist@{ui\_pricelist}}
+\doxysubsubsection{\texorpdfstring{build\_pricelist\_tab()}{build\_pricelist\_tab()}}
+{\footnotesize\ttfamily \label{namespaceui__pricelist_a8edc5912b97b7409c63967a7d724a851} 
+ None ui\+\_\+pricelist.\+build\+\_\+pricelist\+\_\+tab (\begin{DoxyParamCaption}\item[{ttk.\+Frame}]{parent}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}\brief Construct the price list search and management interface.
+
+Creates filters for category, model, price range, and displays search
+results with options to update price or publish products.
+
+\param[in] parent The parent frame where the price list tab should be placed.
+\return None
+\end{DoxyVerb}
+ \Hypertarget{namespaceui__pricelist_ad9f6f9deeca70c71b6796eeb0d1dd4e5}\index{ui\_pricelist@{ui\_pricelist}!fmt\_price@{fmt\_price}}
+\index{fmt\_price@{fmt\_price}!ui\_pricelist@{ui\_pricelist}}
+\doxysubsubsection{\texorpdfstring{fmt\_price()}{fmt\_price()}}
+{\footnotesize\ttfamily \label{namespaceui__pricelist_ad9f6f9deeca70c71b6796eeb0d1dd4e5} 
+ str ui\+\_\+pricelist.\+fmt\+\_\+price (\begin{DoxyParamCaption}\item[{float}]{amount}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}\brief Format a numeric price into human-readable string.
+
+\param[in] amount The price value.
+\return Formatted string, e.g. "1 234 руб.".
+\end{DoxyVerb}
+ 

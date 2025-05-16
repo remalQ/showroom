@@ -1,0 +1,61 @@
+\doxysection{main Namespace Reference}
+\hypertarget{namespacemain}{}\label{namespacemain}\index{main@{main}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{namespacemain_a6a901065a15b73d1077b81d44ad6e283}{center\+\_\+window}} (tk.\+Tk win)
+\item 
+None \mbox{\hyperlink{namespacemain_a12ea045cdcc25013dc50e86b7daf33dd}{open\+\_\+section}} (tk.\+Tk root, str title, callable builder, bool modal=True)
+\item 
+None \mbox{\hyperlink{namespacemain_aa7a58ac748c5293faa4d77a82b94d161}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacemain_ac7e89e95795d3c28f019fa3eb88ce9ce}\label{namespacemain_ac7e89e95795d3c28f019fa3eb88ce9ce} 
+int {\bfseries DEFAULT\+\_\+\+WIDTH} = 900
+\item 
+\Hypertarget{namespacemain_a2afe083bbf497d32e3c1d5b4be85e78a}\label{namespacemain_a2afe083bbf497d32e3c1d5b4be85e78a} 
+int {\bfseries DEFAULT\+\_\+\+HEIGHT} = 650
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file main.py
+@brief Entry point and main window layout for the Auto Showroom application.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemain_a6a901065a15b73d1077b81d44ad6e283}\index{main@{main}!center\_window@{center\_window}}
+\index{center\_window@{center\_window}!main@{main}}
+\doxysubsubsection{\texorpdfstring{center\_window()}{center\_window()}}
+{\footnotesize\ttfamily \label{namespacemain_a6a901065a15b73d1077b81d44ad6e283} 
+ None main.\+center\+\_\+window (\begin{DoxyParamCaption}\item[{tk.\+Tk}]{win}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}\brief Center the given window on the screen.
+
+\param[in] win The tkinter window instance to center.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_aa7a58ac748c5293faa4d77a82b94d161}\index{main@{main}!main@{main}}
+\index{main@{main}!main@{main}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacemain_aa7a58ac748c5293faa4d77a82b94d161} 
+ None main.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}\brief Initialize the database and create the main application window with navigation.
+\end{DoxyVerb}
+ \Hypertarget{namespacemain_a12ea045cdcc25013dc50e86b7daf33dd}\index{main@{main}!open\_section@{open\_section}}
+\index{open\_section@{open\_section}!main@{main}}
+\doxysubsubsection{\texorpdfstring{open\_section()}{open\_section()}}
+{\footnotesize\ttfamily \label{namespacemain_a12ea045cdcc25013dc50e86b7daf33dd} 
+ None main.\+open\+\_\+section (\begin{DoxyParamCaption}\item[{tk.\+Tk}]{root}{, }\item[{str}]{title}{, }\item[{callable}]{builder}{, }\item[{bool }]{modal}{ = {\ttfamily True}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}\brief Open a new child window with consistent size and style.
+
+\param[in] root The parent tkinter root or Toplevel.
+\param[in] title The title for the new window.
+\param[in] builder A function that builds UI elements inside the window.
+\param[in] modal If True, make the window modal.
+\end{DoxyVerb}
+ 
