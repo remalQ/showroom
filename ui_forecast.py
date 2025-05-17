@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file ui_forecast.py
 @brief Module to build and manage the revenue forecast tab in the Auto Showroom UI.
 """
@@ -15,7 +15,7 @@ from scrollable_tab import make_scrollable_tab
 
 
 def fmt_price(amount: float) -> str:
-    """
+    """!
     \brief Format a numeric amount into a human-readable price string.
 
     Rounds to nearest integer and adds thousand separators.
@@ -29,7 +29,7 @@ def fmt_price(amount: float) -> str:
 
 
 def build_forecast_tab(parent: ttk.Frame) -> None:
-    """
+    """!
     \brief Construct the revenue forecast interface.
 
     Creates a scrollable frame with:
@@ -146,7 +146,7 @@ def build_forecast_tab(parent: ttk.Frame) -> None:
     txt.configure(state='disabled')
 
     def compute_forecast() -> None:
-        """
+        """!
         \brief Generate and display actual and forecast data using moving average,
                and compute accuracy metrics on actual data.
 

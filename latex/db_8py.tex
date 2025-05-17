@@ -1,0 +1,401 @@
+\doxysection{db.\+py File Reference}
+\hypertarget{db_8py}{}\label{db_8py}\index{db.py@{db.py}}
+
+
+Database connection and schema initialization for Auto Showroom.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Connection \mbox{\hyperlink{db_8py_a3a62dfdf391171d75b0839c961a9e7f0}{db.\+connect}} ()
+\begin{DoxyCompactList}\small\item\em Create a new database connection. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_ac28637b9c043429f19acc14f61dc86ab}{db.\+init\+\_\+db}} ()
+\begin{DoxyCompactList}\small\item\em Initialize database schema and perform migrations. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_a206c623c039a0d24f9bf7cb16b1b4420}{db.\+add\+\_\+client}} (str name, str phone, str client\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Insert a new client record. \end{DoxyCompactList}\item 
+list\mbox{[}sqlite3.\+Row\mbox{]} \mbox{\hyperlink{db_8py_af6992acb44503ee4d20e814994f3677b}{db.\+get\+\_\+clients}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve all clients. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_a164b26fa9e23d645db76d6c2c489390a}{db.\+add\+\_\+employee}} (str name, str department)
+\begin{DoxyCompactList}\small\item\em Insert a new employee. \end{DoxyCompactList}\item 
+list\mbox{[}sqlite3.\+Row\mbox{]} \mbox{\hyperlink{db_8py_a93a9ad67989333056bcaad557f1653e3}{db.\+get\+\_\+employees}} (str\texorpdfstring{$\vert$}{|}None dept=None)
+\begin{DoxyCompactList}\small\item\em Retrieve employees, optionally filtered by department. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_ad46ee8c7b8b8cd630d28d5cea7067b7f}{db.\+add\+\_\+category}} (str name)
+\begin{DoxyCompactList}\small\item\em Add a product category if not exists. \end{DoxyCompactList}\item 
+list\mbox{[}sqlite3.\+Row\mbox{]} \mbox{\hyperlink{db_8py_ad7aa53169a3921c4a52b9a47b16ad976}{db.\+get\+\_\+categories}} ()
+\begin{DoxyCompactList}\small\item\em Get all product categories. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_a1945d8ab19ab0901f536b4d42558e18a}{db.\+add\+\_\+product}} (str name, int category\+\_\+id, float price, bool used=False)
+\begin{DoxyCompactList}\small\item\em Insert a new product record. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_aa22aaadd53265de59cc49815689368b0}{db.\+update\+\_\+product}} (float price, int prod\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Update price for a product. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_a552cd713857a39963b38e9d0447fbfc9}{db.\+publish\+\_\+product}} (int prod\+\_\+id, bool published=True)
+\begin{DoxyCompactList}\small\item\em Set published flag for a product. \end{DoxyCompactList}\item 
+list\mbox{[}sqlite3.\+Row\mbox{]} \mbox{\hyperlink{db_8py_ab73351513f994612c21a336188ae5c3a}{db.\+search\+\_\+products}} (int\texorpdfstring{$\vert$}{|}None cat\+\_\+id=None, str model\+\_\+query="{}"{}, float\texorpdfstring{$\vert$}{|}None min\+\_\+price=None, float\texorpdfstring{$\vert$}{|}None max\+\_\+price=None)
+\begin{DoxyCompactList}\small\item\em Search products by filters. \end{DoxyCompactList}\item 
+list\mbox{[}sqlite3.\+Row\mbox{]} \mbox{\hyperlink{db_8py_a11eda6b018c083fe0d491965ff469d5f}{db.\+get\+\_\+used\+\_\+products}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve only used products. \end{DoxyCompactList}\item 
+list\mbox{[}sqlite3.\+Row\mbox{]} \mbox{\hyperlink{db_8py_ac87c7cbd2327ce145a5b3b541cba7622}{db.\+get\+\_\+new\+\_\+products}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve only new products. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_a2a26e9ce56c6305a49baad8d30828d0c}{db.\+add\+\_\+request}} (int client\+\_\+id, int emp\+\_\+id, str service, str date, str status)
+\begin{DoxyCompactList}\small\item\em Insert maintenance/service request. \end{DoxyCompactList}\item 
+list\mbox{[}sqlite3.\+Row\mbox{]} \mbox{\hyperlink{db_8py_a673f2535048b0a0d8db2fd0f25c0c3a0}{db.\+get\+\_\+requests}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve all service requests. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_a821092c1ee79db930a508ecea4bfb0d1}{db.\+add\+\_\+sale}} (int prod\+\_\+id, int client\+\_\+id, int emp\+\_\+id, str date, float price, str contract)
+\begin{DoxyCompactList}\small\item\em Record a sale transaction. \end{DoxyCompactList}\item 
+list\mbox{[}sqlite3.\+Row\mbox{]} \mbox{\hyperlink{db_8py_a2463fa25266705c13f1c27a406ccc6ad}{db.\+get\+\_\+sales}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve all sales records. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{db_8py_acf7398eec18536a525df994bfe1a2fa8}{db.\+add\+\_\+tradein}} (int new\+\_\+prod\+\_\+id, str old\+\_\+details, int client\+\_\+id, int emp\+\_\+id, str date, float price\+\_\+diff)
+\begin{DoxyCompactList}\small\item\em Record a trade-\/in transaction. \end{DoxyCompactList}\item 
+list\mbox{[}sqlite3.\+Row\mbox{]} \mbox{\hyperlink{db_8py_a980a61fccfdae23d44bdbe4a7efdd66b}{db.\+get\+\_\+tradeins}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve all trade-\/in transactions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{db_8py_af3ad5a48da623b35a56319c1067324b5}\label{db_8py_af3ad5a48da623b35a56319c1067324b5} 
+str {\bfseries db.\+DB\+\_\+\+NAME} = "{}autosalon.\+db"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Database connection and schema initialization for Auto Showroom. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{db_8py_ad46ee8c7b8b8cd630d28d5cea7067b7f}\index{db.py@{db.py}!add\_category@{add\_category}}
+\index{add\_category@{add\_category}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{add\_category()}{add\_category()}}
+{\footnotesize\ttfamily \label{db_8py_ad46ee8c7b8b8cd630d28d5cea7067b7f} 
+ None db.\+add\+\_\+category (\begin{DoxyParamCaption}\item[{str}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Add a product category if not exists. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em name} & Category name. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{db_8py_a206c623c039a0d24f9bf7cb16b1b4420}\index{db.py@{db.py}!add\_client@{add\_client}}
+\index{add\_client@{add\_client}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{add\_client()}{add\_client()}}
+{\footnotesize\ttfamily \label{db_8py_a206c623c039a0d24f9bf7cb16b1b4420} 
+ None db.\+add\+\_\+client (\begin{DoxyParamCaption}\item[{str}]{name}{, }\item[{str}]{phone}{, }\item[{str}]{client\+\_\+type}{}\end{DoxyParamCaption})}
+
+
+
+Insert a new client record. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em name} & Client full name. \\
+\hline
+\mbox{\texttt{ in}}  & {\em phone} & Contact phone number. \\
+\hline
+\mbox{\texttt{ in}}  & {\em client\+\_\+type} & Type/category of client. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{db_8py_a164b26fa9e23d645db76d6c2c489390a}\index{db.py@{db.py}!add\_employee@{add\_employee}}
+\index{add\_employee@{add\_employee}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{add\_employee()}{add\_employee()}}
+{\footnotesize\ttfamily \label{db_8py_a164b26fa9e23d645db76d6c2c489390a} 
+ None db.\+add\+\_\+employee (\begin{DoxyParamCaption}\item[{str}]{name}{, }\item[{str}]{department}{}\end{DoxyParamCaption})}
+
+
+
+Insert a new employee. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em name} & Employee full name. \\
+\hline
+\mbox{\texttt{ in}}  & {\em department} & Department name. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{db_8py_a1945d8ab19ab0901f536b4d42558e18a}\index{db.py@{db.py}!add\_product@{add\_product}}
+\index{add\_product@{add\_product}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{add\_product()}{add\_product()}}
+{\footnotesize\ttfamily \label{db_8py_a1945d8ab19ab0901f536b4d42558e18a} 
+ None db.\+add\+\_\+product (\begin{DoxyParamCaption}\item[{str}]{name}{, }\item[{int}]{category\+\_\+id}{, }\item[{float}]{price}{, }\item[{bool }]{used}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+
+
+Insert a new product record. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em name} & Product name. \\
+\hline
+\mbox{\texttt{ in}}  & {\em category\+\_\+id} & Foreign key to categories. \\
+\hline
+\mbox{\texttt{ in}}  & {\em price} & Product price. \\
+\hline
+\mbox{\texttt{ in}}  & {\em used} & Flag indicating if product is used. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{db_8py_a2a26e9ce56c6305a49baad8d30828d0c}\index{db.py@{db.py}!add\_request@{add\_request}}
+\index{add\_request@{add\_request}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{add\_request()}{add\_request()}}
+{\footnotesize\ttfamily \label{db_8py_a2a26e9ce56c6305a49baad8d30828d0c} 
+ None db.\+add\+\_\+request (\begin{DoxyParamCaption}\item[{int}]{client\+\_\+id}{, }\item[{int}]{emp\+\_\+id}{, }\item[{str}]{service}{, }\item[{str}]{date}{, }\item[{str }]{status}{}\end{DoxyParamCaption})}
+
+
+
+Insert maintenance/service request. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em client\+\_\+id} & Foreign key to clients. \\
+\hline
+\mbox{\texttt{ in}}  & {\em emp\+\_\+id} & Foreign key to employees. \\
+\hline
+\mbox{\texttt{ in}}  & {\em service} & Description of service. \\
+\hline
+\mbox{\texttt{ in}}  & {\em date} & Date string (ISO format recommended). \\
+\hline
+\mbox{\texttt{ in}}  & {\em status} & Current request status. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{db_8py_a821092c1ee79db930a508ecea4bfb0d1}\index{db.py@{db.py}!add\_sale@{add\_sale}}
+\index{add\_sale@{add\_sale}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{add\_sale()}{add\_sale()}}
+{\footnotesize\ttfamily \label{db_8py_a821092c1ee79db930a508ecea4bfb0d1} 
+ None db.\+add\+\_\+sale (\begin{DoxyParamCaption}\item[{int}]{prod\+\_\+id}{, }\item[{int}]{client\+\_\+id}{, }\item[{int}]{emp\+\_\+id}{, }\item[{str}]{date}{, }\item[{float}]{price}{, }\item[{str }]{contract}{}\end{DoxyParamCaption})}
+
+
+
+Record a sale transaction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em prod\+\_\+id} & Product ID sold. \\
+\hline
+\mbox{\texttt{ in}}  & {\em client\+\_\+id} & Client ID. \\
+\hline
+\mbox{\texttt{ in}}  & {\em emp\+\_\+id} & Employee ID who made sale. \\
+\hline
+\mbox{\texttt{ in}}  & {\em date} & Date of sale. \\
+\hline
+\mbox{\texttt{ in}}  & {\em price} & Final sale price. \\
+\hline
+\mbox{\texttt{ in}}  & {\em contract} & Contract document reference. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{db_8py_acf7398eec18536a525df994bfe1a2fa8}\index{db.py@{db.py}!add\_tradein@{add\_tradein}}
+\index{add\_tradein@{add\_tradein}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{add\_tradein()}{add\_tradein()}}
+{\footnotesize\ttfamily \label{db_8py_acf7398eec18536a525df994bfe1a2fa8} 
+ None db.\+add\+\_\+tradein (\begin{DoxyParamCaption}\item[{int}]{new\+\_\+prod\+\_\+id}{, }\item[{str}]{old\+\_\+details}{, }\item[{int}]{client\+\_\+id}{, }\item[{int}]{emp\+\_\+id}{, }\item[{str}]{date}{, }\item[{float }]{price\+\_\+diff}{}\end{DoxyParamCaption})}
+
+
+
+Record a trade-\/in transaction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em new\+\_\+prod\+\_\+id} & New product ID. \\
+\hline
+\mbox{\texttt{ in}}  & {\em old\+\_\+details} & Description of old item. \\
+\hline
+\mbox{\texttt{ in}}  & {\em client\+\_\+id} & Client ID. \\
+\hline
+\mbox{\texttt{ in}}  & {\em emp\+\_\+id} & Employee ID. \\
+\hline
+\mbox{\texttt{ in}}  & {\em date} & Date of trade-\/in. \\
+\hline
+\mbox{\texttt{ in}}  & {\em price\+\_\+diff} & Price difference credited. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{db_8py_a3a62dfdf391171d75b0839c961a9e7f0}\index{db.py@{db.py}!connect@{connect}}
+\index{connect@{connect}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily \label{db_8py_a3a62dfdf391171d75b0839c961a9e7f0} 
+ Connection db.\+connect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Create a new database connection. 
+
+Sets row factory to sqlite3.\+Row for named column access.
+
+\begin{DoxyReturn}{Returns}
+An open sqlite3.\+Connection object. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_ad7aa53169a3921c4a52b9a47b16ad976}\index{db.py@{db.py}!get\_categories@{get\_categories}}
+\index{get\_categories@{get\_categories}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{get\_categories()}{get\_categories()}}
+{\footnotesize\ttfamily \label{db_8py_ad7aa53169a3921c4a52b9a47b16ad976} 
+ list\mbox{[}sqlite3.\+Row\mbox{]} db.\+get\+\_\+categories (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Get all product categories. 
+
+\begin{DoxyReturn}{Returns}
+List of sqlite3.\+Row objects with columns id, name. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_af6992acb44503ee4d20e814994f3677b}\index{db.py@{db.py}!get\_clients@{get\_clients}}
+\index{get\_clients@{get\_clients}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{get\_clients()}{get\_clients()}}
+{\footnotesize\ttfamily \label{db_8py_af6992acb44503ee4d20e814994f3677b} 
+ list\mbox{[}sqlite3.\+Row\mbox{]} db.\+get\+\_\+clients (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve all clients. 
+
+\begin{DoxyReturn}{Returns}
+List of sqlite3.\+Row objects with columns id, name, type. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_a93a9ad67989333056bcaad557f1653e3}\index{db.py@{db.py}!get\_employees@{get\_employees}}
+\index{get\_employees@{get\_employees}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{get\_employees()}{get\_employees()}}
+{\footnotesize\ttfamily \label{db_8py_a93a9ad67989333056bcaad557f1653e3} 
+ list\mbox{[}sqlite3.\+Row\mbox{]} db.\+get\+\_\+employees (\begin{DoxyParamCaption}\item[{str \texorpdfstring{$\vert$}{|} None }]{dept}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+Retrieve employees, optionally filtered by department. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em dept} & Department name filter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of sqlite3.\+Row objects with columns id, name, department. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_ac87c7cbd2327ce145a5b3b541cba7622}\index{db.py@{db.py}!get\_new\_products@{get\_new\_products}}
+\index{get\_new\_products@{get\_new\_products}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{get\_new\_products()}{get\_new\_products()}}
+{\footnotesize\ttfamily \label{db_8py_ac87c7cbd2327ce145a5b3b541cba7622} 
+ list\mbox{[}sqlite3.\+Row\mbox{]} db.\+get\+\_\+new\+\_\+products (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve only new products. 
+
+\begin{DoxyReturn}{Returns}
+Filtered list where used=0. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_a673f2535048b0a0d8db2fd0f25c0c3a0}\index{db.py@{db.py}!get\_requests@{get\_requests}}
+\index{get\_requests@{get\_requests}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{get\_requests()}{get\_requests()}}
+{\footnotesize\ttfamily \label{db_8py_a673f2535048b0a0d8db2fd0f25c0c3a0} 
+ list\mbox{[}sqlite3.\+Row\mbox{]} db.\+get\+\_\+requests (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve all service requests. 
+
+\begin{DoxyReturn}{Returns}
+List of all requests. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_a2463fa25266705c13f1c27a406ccc6ad}\index{db.py@{db.py}!get\_sales@{get\_sales}}
+\index{get\_sales@{get\_sales}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{get\_sales()}{get\_sales()}}
+{\footnotesize\ttfamily \label{db_8py_a2463fa25266705c13f1c27a406ccc6ad} 
+ list\mbox{[}sqlite3.\+Row\mbox{]} db.\+get\+\_\+sales (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve all sales records. 
+
+\begin{DoxyReturn}{Returns}
+List of sales. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_a980a61fccfdae23d44bdbe4a7efdd66b}\index{db.py@{db.py}!get\_tradeins@{get\_tradeins}}
+\index{get\_tradeins@{get\_tradeins}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{get\_tradeins()}{get\_tradeins()}}
+{\footnotesize\ttfamily \label{db_8py_a980a61fccfdae23d44bdbe4a7efdd66b} 
+ list\mbox{[}sqlite3.\+Row\mbox{]} db.\+get\+\_\+tradeins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve all trade-\/in transactions. 
+
+\begin{DoxyReturn}{Returns}
+List of trade-\/ins. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_a11eda6b018c083fe0d491965ff469d5f}\index{db.py@{db.py}!get\_used\_products@{get\_used\_products}}
+\index{get\_used\_products@{get\_used\_products}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{get\_used\_products()}{get\_used\_products()}}
+{\footnotesize\ttfamily \label{db_8py_a11eda6b018c083fe0d491965ff469d5f} 
+ list\mbox{[}sqlite3.\+Row\mbox{]} db.\+get\+\_\+used\+\_\+products (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieve only used products. 
+
+\begin{DoxyReturn}{Returns}
+Filtered list where used=1. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_ac28637b9c043429f19acc14f61dc86ab}\index{db.py@{db.py}!init\_db@{init\_db}}
+\index{init\_db@{init\_db}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{init\_db()}{init\_db()}}
+{\footnotesize\ttfamily \label{db_8py_ac28637b9c043429f19acc14f61dc86ab} 
+ None db.\+init\+\_\+db (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize database schema and perform migrations. 
+
+Creates tables if they do not exist and adds new columns when missing. \Hypertarget{db_8py_a552cd713857a39963b38e9d0447fbfc9}\index{db.py@{db.py}!publish\_product@{publish\_product}}
+\index{publish\_product@{publish\_product}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{publish\_product()}{publish\_product()}}
+{\footnotesize\ttfamily \label{db_8py_a552cd713857a39963b38e9d0447fbfc9} 
+ None db.\+publish\+\_\+product (\begin{DoxyParamCaption}\item[{int}]{prod\+\_\+id}{, }\item[{bool }]{published}{ = {\ttfamily True}}\end{DoxyParamCaption})}
+
+
+
+Set published flag for a product. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em prod\+\_\+id} & Product ID. \\
+\hline
+\mbox{\texttt{ in}}  & {\em published} & Boolean to publish (True) or unpublish (False). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{db_8py_ab73351513f994612c21a336188ae5c3a}\index{db.py@{db.py}!search\_products@{search\_products}}
+\index{search\_products@{search\_products}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{search\_products()}{search\_products()}}
+{\footnotesize\ttfamily \label{db_8py_ab73351513f994612c21a336188ae5c3a} 
+ list\mbox{[}sqlite3.\+Row\mbox{]} db.\+search\+\_\+products (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\vert$}{|} None }]{cat\+\_\+id}{ = {\ttfamily None}, }\item[{str }]{model\+\_\+query}{ = {\ttfamily "{}"{}}, }\item[{float \texorpdfstring{$\vert$}{|} None }]{min\+\_\+price}{ = {\ttfamily None}, }\item[{float \texorpdfstring{$\vert$}{|} None }]{max\+\_\+price}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+Search products by filters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em cat\+\_\+id} & Category ID filter. \\
+\hline
+\mbox{\texttt{ in}}  & {\em model\+\_\+query} & Substring match for product name. \\
+\hline
+\mbox{\texttt{ in}}  & {\em min\+\_\+price} & Minimum price filter. \\
+\hline
+\mbox{\texttt{ in}}  & {\em max\+\_\+price} & Maximum price filter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of sqlite3.\+Row matching products. 
+\end{DoxyReturn}
+\Hypertarget{db_8py_aa22aaadd53265de59cc49815689368b0}\index{db.py@{db.py}!update\_product@{update\_product}}
+\index{update\_product@{update\_product}!db.py@{db.py}}
+\doxysubsubsection{\texorpdfstring{update\_product()}{update\_product()}}
+{\footnotesize\ttfamily \label{db_8py_aa22aaadd53265de59cc49815689368b0} 
+ None db.\+update\+\_\+product (\begin{DoxyParamCaption}\item[{float}]{price}{, }\item[{int}]{prod\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+Update price for a product. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em price} & New product price. \\
+\hline
+\mbox{\texttt{ in}}  & {\em prod\+\_\+id} & Product ID. \\
+\hline
+\end{DoxyParams}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file ui_pricelist.py
 @brief Module to build and manage the price list tab in the Auto Showroom UI.
 """
@@ -13,7 +13,7 @@ from scrollable_tab import make_scrollable_tab
 
 
 def fmt_price(amount: float) -> str:
-    """
+    """!
     \brief Format a numeric price into human-readable string.
 
     \param[in] amount The price value.
@@ -25,7 +25,7 @@ def fmt_price(amount: float) -> str:
 
 
 def build_pricelist_tab(parent: ttk.Frame) -> None:
-    """
+    """!
     \brief Construct the price list search and management interface.
 
     Creates filters for category, model, price range, and displays search
@@ -80,7 +80,7 @@ def build_pricelist_tab(parent: ttk.Frame) -> None:
     entry_price_max.grid(row=3, column=1, sticky='ew', padx=5, pady=5)
 
     def search_callback() -> None:
-        """
+        """!
         \brief Perform product search and update results table.
         """
         try:
@@ -147,7 +147,7 @@ def build_pricelist_tab(parent: ttk.Frame) -> None:
     hsb.grid(row=1, column=0, sticky='ew')
 
     def _populate_results(rows: list[tk.Event]) -> None:
-        """
+        """!
         \brief Populate the treeview with search result rows.
         """
         for item in tree.get_children():
@@ -167,7 +167,7 @@ def build_pricelist_tab(parent: ttk.Frame) -> None:
             )
 
     def update_price_callback() -> None:
-        """
+        """!
         \brief Open a dialog to update the selected product's price.
         """
         selection = tree.selection()
@@ -194,7 +194,7 @@ def build_pricelist_tab(parent: ttk.Frame) -> None:
         ttk.Button(top, text='Сохранить', command=save_new_price).pack(pady=10)
 
     def publish_product_callback() -> None:
-        """
+        """!
         \brief Publish the selected product.
         """
         selection = tree.selection()

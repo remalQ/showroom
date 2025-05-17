@@ -47,14 +47,5 @@ var namespaces_dup =
     [ "ui_products", "namespaceui__products.html", [
       [ "build_product_tab", "namespaceui__products.html#a4865a1671ef013f96ac63de8b0bf0c21", null ],
       [ "fmt_price", "namespaceui__products.html#a23f3491677f731c5f112fd120de57e02", null ]
-    ] ],
-    [ "ui_requests", "namespaceui__requests.html", [
-      [ "build_request_tab", "namespaceui__requests.html#a6d4ef4a269940a576441b990c546819c", null ]
-    ] ],
-    [ "ui_sales", "namespaceui__sales.html", [
-      [ "build_sales_tab", "namespaceui__sales.html#a872e7c9a1200bea5992e28e8c11b10f7", null ]
-    ] ],
-    [ "ui_tradein", "namespaceui__tradein.html", [
-      [ "build_tradein_tab", "namespaceui__tradein.html#a29c5a78c15f1f2d31cacde00ef182635", null ]
     ] ]
 ];

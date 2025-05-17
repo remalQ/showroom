@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file db.py
 @brief Database connection and schema initialization for Auto Showroom.
 """
@@ -11,7 +11,7 @@ DB_NAME: str = "autosalon.db"
 
 
 def connect() -> Connection:
-    """
+    """!
     \brief Create a new database connection.
 
     Sets row factory to sqlite3.Row for named column access.
@@ -24,7 +24,7 @@ def connect() -> Connection:
 
 
 def init_db() -> None:
-    """
+    """!
     \brief Initialize database schema and perform migrations.
 
     Creates tables if they do not exist and adds new columns when missing.
@@ -118,7 +118,7 @@ def init_db() -> None:
 
     # --- Perform migrations: add missing columns ---
     def _add_column(table: str, column_def: str) -> None:
-        """
+        """!
         \brief Add a column to a table if it does not exist.
 
         \param[in] table Name of the table.
@@ -142,7 +142,7 @@ def init_db() -> None:
 # --- CRUD operations ---
 
 def add_client(name: str, phone: str, client_type: str) -> None:
-    """
+    """!
     \brief Insert a new client record.
 
     \param[in] name Client full name.
@@ -155,7 +155,7 @@ def add_client(name: str, phone: str, client_type: str) -> None:
 
 
 def get_clients() -> list[sqlite3.Row]:
-    """
+    """!
     \brief Retrieve all clients.
 
     \return List of sqlite3.Row objects with columns id, name, type.
@@ -166,7 +166,7 @@ def get_clients() -> list[sqlite3.Row]:
 
 
 def add_employee(name: str, department: str) -> None:
-    """
+    """!
     \brief Insert a new employee.
 
     \param[in] name Employee full name.
@@ -178,7 +178,7 @@ def add_employee(name: str, department: str) -> None:
 
 
 def get_employees(dept: str | None = None) -> list[sqlite3.Row]:
-    """
+    """!
     \brief Retrieve employees, optionally filtered by department.
 
     \param[in] dept Department name filter.
@@ -194,7 +194,7 @@ def get_employees(dept: str | None = None) -> list[sqlite3.Row]:
 
 
 def add_category(name: str) -> None:
-    """
+    """!
     \brief Add a product category if not exists.
 
     \param[in] name Category name.
@@ -205,7 +205,7 @@ def add_category(name: str) -> None:
 
 
 def get_categories() -> list[sqlite3.Row]:
-    """
+    """!
     \brief Get all product categories.
 
     \return List of sqlite3.Row objects with columns id, name.
@@ -221,7 +221,7 @@ def add_product(
     price: float,
     used: bool = False
 ) -> None:
-    """
+    """!
     \brief Insert a new product record.
 
     \param[in] name Product name.
@@ -237,7 +237,7 @@ def add_product(
 
 
 def update_product(price: float, prod_id: int) -> None:
-    """
+    """!
     \brief Update price for a product.
 
     \param[in] price New product price.
@@ -249,7 +249,7 @@ def update_product(price: float, prod_id: int) -> None:
 
 
 def publish_product(prod_id: int, published: bool = True) -> None:
-    """
+    """!
     \brief Set published flag for a product.
 
     \param[in] prod_id Product ID.
@@ -266,7 +266,7 @@ def search_products(
     min_price: float | None = None,
     max_price: float | None = None
 ) -> list[sqlite3.Row]:
-    """
+    """!
     \brief Search products by filters.
 
     \param[in] cat_id Category ID filter.
@@ -298,7 +298,7 @@ def search_products(
 
 
 def get_used_products() -> list[sqlite3.Row]:
-    """
+    """!
     \brief Retrieve only used products.
 
     \return Filtered list where used=1.
@@ -307,7 +307,7 @@ def get_used_products() -> list[sqlite3.Row]:
 
 
 def get_new_products() -> list[sqlite3.Row]:
-    """
+    """!
     \brief Retrieve only new products.
 
     \return Filtered list where used=0.
@@ -322,7 +322,7 @@ def add_request(
     date: str,
     status: str
 ) -> None:
-    """
+    """!
     \brief Insert maintenance/service request.
 
     \param[in] client_id Foreign key to clients.
@@ -341,7 +341,7 @@ def add_request(
 
 
 def get_requests() -> list[sqlite3.Row]:
-    """
+    """!
     \brief Retrieve all service requests.
 
     \return List of all requests.
@@ -359,7 +359,7 @@ def add_sale(
     price: float,
     contract: str
 ) -> None:
-    """
+    """!
     \brief Record a sale transaction.
 
     \param[in] prod_id Product ID sold.
@@ -379,7 +379,7 @@ def add_sale(
 
 
 def get_sales() -> list[sqlite3.Row]:
-    """
+    """!
     \brief Retrieve all sales records.
 
     \return List of sales.
@@ -397,7 +397,7 @@ def add_tradein(
     date: str,
     price_diff: float
 ) -> None:
-    """
+    """!
     \brief Record a trade-in transaction.
 
     \param[in] new_prod_id New product ID.
@@ -417,7 +417,7 @@ def add_tradein(
 
 
 def get_tradeins() -> list[sqlite3.Row]:
-    """
+    """!
     \brief Retrieve all trade-in transactions.
 
     \return List of trade-ins.

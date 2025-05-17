@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file main.py
 @brief Entry point and main window layout for the Auto Showroom application.
 """
@@ -25,7 +25,7 @@ DEFAULT_HEIGHT: int = 650  # pixels
 
 
 def center_window(win: tk.Tk) -> None:
-    """
+    """!
     \brief Center the given window on the screen.
 
     \param[in] win The tkinter window instance to center.
@@ -44,7 +44,7 @@ def open_section(
     builder: callable,
     modal: bool = True
 ) -> None:
-    """
+    """!
     \brief Open a new child window with consistent size and style.
 
     \param[in] root The parent tkinter root or Toplevel.
@@ -69,7 +69,7 @@ def open_section(
 
 
 def main() -> None:
-    """
+    """!
     \brief Initialize the database and create the main application window with navigation.
     """
     db.init_db()
@@ -139,7 +139,7 @@ def main() -> None:
     preview.grid(row=0, column=1, sticky="nsew")
 
     def clear_preview() -> None:
-        """
+        """!
         \brief Clear the preview area and display a placeholder message.
         """
         for child in preview.winfo_children():
@@ -153,7 +153,7 @@ def main() -> None:
         message.pack(expand=True)
 
     def show_preview(builder_func: callable) -> None:
-        """
+        """!
         \brief Render a preview of the section UI without opening a new window.
 
         \param[in] builder_func The UI builder function to render into the preview frame.

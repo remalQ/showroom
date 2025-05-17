@@ -1,0 +1,67 @@
+\doxysection{ui\+\_\+forecast.\+py File Reference}
+\hypertarget{ui__forecast_8py}{}\label{ui__forecast_8py}\index{ui\_forecast.py@{ui\_forecast.py}}
+
+
+Module to build and manage the revenue forecast tab in the Auto Showroom UI.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{ui__forecast_8py_a56a9be22088d48ebd0693f3acd3b1b96}{ui\+\_\+forecast.\+fmt\+\_\+price}} (float amount)
+\begin{DoxyCompactList}\small\item\em Format a numeric amount into a human-\/readable price string. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{ui__forecast_8py_a5ed4b2e4ae23b42ebb0b59a93cebac8a}{ui\+\_\+forecast.\+build\+\_\+forecast\+\_\+tab}} (ttk.\+Frame parent)
+\begin{DoxyCompactList}\small\item\em Construct the revenue forecast interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Module to build and manage the revenue forecast tab in the Auto Showroom UI. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{ui__forecast_8py_a5ed4b2e4ae23b42ebb0b59a93cebac8a}\index{ui\_forecast.py@{ui\_forecast.py}!build\_forecast\_tab@{build\_forecast\_tab}}
+\index{build\_forecast\_tab@{build\_forecast\_tab}!ui\_forecast.py@{ui\_forecast.py}}
+\doxysubsubsection{\texorpdfstring{build\_forecast\_tab()}{build\_forecast\_tab()}}
+{\footnotesize\ttfamily \label{ui__forecast_8py_a5ed4b2e4ae23b42ebb0b59a93cebac8a} 
+ None ui\+\_\+forecast.\+build\+\_\+forecast\+\_\+tab (\begin{DoxyParamCaption}\item[{ttk.\+Frame}]{parent}{}\end{DoxyParamCaption})}
+
+
+
+Construct the revenue forecast interface. 
+
+Creates a scrollable frame with\+:
+\begin{DoxyItemize}
+\item Controls to set the moving average window.
+\item Table showing actual and forecasted monthly revenue for 2025.
+\item Text area detailing the moving average calculations and accuracy metrics.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em parent} & The parent frame where the forecast tab is placed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{ui__forecast_8py_a56a9be22088d48ebd0693f3acd3b1b96}\index{ui\_forecast.py@{ui\_forecast.py}!fmt\_price@{fmt\_price}}
+\index{fmt\_price@{fmt\_price}!ui\_forecast.py@{ui\_forecast.py}}
+\doxysubsubsection{\texorpdfstring{fmt\_price()}{fmt\_price()}}
+{\footnotesize\ttfamily \label{ui__forecast_8py_a56a9be22088d48ebd0693f3acd3b1b96} 
+ str ui\+\_\+forecast.\+fmt\+\_\+price (\begin{DoxyParamCaption}\item[{float}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Format a numeric amount into a human-\/readable price string. 
+
+Rounds to nearest integer and adds thousand separators.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em amount} & Value to format. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Formatted string, e.\+g. "{}1 234 руб."{}. 
+\end{DoxyReturn}

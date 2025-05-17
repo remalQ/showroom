@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file scrollable_tab.py
 @brief Utility to create a vertically scrollable frame in Tkinter.
 
@@ -14,7 +14,7 @@ from tkinter import Widget
 
 
 def make_scrollable_tab(parent: Widget) -> ttk.Frame:
-    """
+    """!
     \brief Create and return a scrollable frame inside the given parent.
 
     \param[in] parent The container widget where the scrollable frame is placed.
@@ -32,7 +32,7 @@ def make_scrollable_tab(parent: Widget) -> ttk.Frame:
     scrollable_container = ttk.Frame(canvas)
 
     def _on_configure(event: tk.Event) -> None:
-        """
+        """!
         \brief Update scroll region when the inner frame size changes.
         """
         canvas.configure(scrollregion=canvas.bbox('all'))
@@ -55,7 +55,7 @@ def make_scrollable_tab(parent: Widget) -> ttk.Frame:
     scrollbar.pack(side='right', fill='y')
 
     def _on_mousewheel(event: tk.Event) -> None:
-        """
+        """!
         \brief Scroll canvas content on mouse wheel events.
         """
         canvas.yview_scroll(-int(event.delta / 120), 'units')

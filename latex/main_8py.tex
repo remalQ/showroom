@@ -1,0 +1,70 @@
+\doxysection{main.\+py File Reference}
+\hypertarget{main_8py}{}\label{main_8py}\index{main.py@{main.py}}
+
+
+Entry point and main window layout for the Auto Showroom application.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{main_8py_a6a901065a15b73d1077b81d44ad6e283}{main.\+center\+\_\+window}} (tk.\+Tk win)
+\begin{DoxyCompactList}\small\item\em Center the given window on the screen. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{main_8py_a12ea045cdcc25013dc50e86b7daf33dd}{main.\+open\+\_\+section}} (tk.\+Tk root, str title, callable builder, bool modal=True)
+\begin{DoxyCompactList}\small\item\em Open a new child window with consistent size and style. \end{DoxyCompactList}\item 
+\Hypertarget{main_8py_aa7a58ac748c5293faa4d77a82b94d161}\label{main_8py_aa7a58ac748c5293faa4d77a82b94d161} 
+None {\bfseries main.\+main} ()
+\begin{DoxyCompactList}\small\item\em Initialize the database and create the main application window with navigation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8py_ac7e89e95795d3c28f019fa3eb88ce9ce}\label{main_8py_ac7e89e95795d3c28f019fa3eb88ce9ce} 
+int {\bfseries main.\+DEFAULT\+\_\+\+WIDTH} = 900
+\item 
+\Hypertarget{main_8py_a2afe083bbf497d32e3c1d5b4be85e78a}\label{main_8py_a2afe083bbf497d32e3c1d5b4be85e78a} 
+int {\bfseries main.\+DEFAULT\+\_\+\+HEIGHT} = 650
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entry point and main window layout for the Auto Showroom application. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8py_a6a901065a15b73d1077b81d44ad6e283}\index{main.py@{main.py}!center\_window@{center\_window}}
+\index{center\_window@{center\_window}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{center\_window()}{center\_window()}}
+{\footnotesize\ttfamily \label{main_8py_a6a901065a15b73d1077b81d44ad6e283} 
+ None main.\+center\+\_\+window (\begin{DoxyParamCaption}\item[{tk.\+Tk}]{win}{}\end{DoxyParamCaption})}
+
+
+
+Center the given window on the screen. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em win} & The tkinter window instance to center. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8py_a12ea045cdcc25013dc50e86b7daf33dd}\index{main.py@{main.py}!open\_section@{open\_section}}
+\index{open\_section@{open\_section}!main.py@{main.py}}
+\doxysubsubsection{\texorpdfstring{open\_section()}{open\_section()}}
+{\footnotesize\ttfamily \label{main_8py_a12ea045cdcc25013dc50e86b7daf33dd} 
+ None main.\+open\+\_\+section (\begin{DoxyParamCaption}\item[{tk.\+Tk}]{root}{, }\item[{str}]{title}{, }\item[{callable}]{builder}{, }\item[{bool }]{modal}{ = {\ttfamily True}}\end{DoxyParamCaption})}
+
+
+
+Open a new child window with consistent size and style. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em root} & The parent tkinter root or Toplevel. \\
+\hline
+\mbox{\texttt{ in}}  & {\em title} & The title for the new window. \\
+\hline
+\mbox{\texttt{ in}}  & {\em builder} & A function that builds UI elements inside the window. \\
+\hline
+\mbox{\texttt{ in}}  & {\em modal} & If True, make the window modal. \\
+\hline
+\end{DoxyParams}

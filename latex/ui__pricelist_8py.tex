@@ -1,0 +1,60 @@
+\doxysection{ui\+\_\+pricelist.\+py File Reference}
+\hypertarget{ui__pricelist_8py}{}\label{ui__pricelist_8py}\index{ui\_pricelist.py@{ui\_pricelist.py}}
+
+
+Module to build and manage the price list tab in the Auto Showroom UI.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{ui__pricelist_8py_ad9f6f9deeca70c71b6796eeb0d1dd4e5}{ui\+\_\+pricelist.\+fmt\+\_\+price}} (float amount)
+\begin{DoxyCompactList}\small\item\em Format a numeric price into human-\/readable string. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{ui__pricelist_8py_a8edc5912b97b7409c63967a7d724a851}{ui\+\_\+pricelist.\+build\+\_\+pricelist\+\_\+tab}} (ttk.\+Frame parent)
+\begin{DoxyCompactList}\small\item\em Construct the price list search and management interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Module to build and manage the price list tab in the Auto Showroom UI. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{ui__pricelist_8py_a8edc5912b97b7409c63967a7d724a851}\index{ui\_pricelist.py@{ui\_pricelist.py}!build\_pricelist\_tab@{build\_pricelist\_tab}}
+\index{build\_pricelist\_tab@{build\_pricelist\_tab}!ui\_pricelist.py@{ui\_pricelist.py}}
+\doxysubsubsection{\texorpdfstring{build\_pricelist\_tab()}{build\_pricelist\_tab()}}
+{\footnotesize\ttfamily \label{ui__pricelist_8py_a8edc5912b97b7409c63967a7d724a851} 
+ None ui\+\_\+pricelist.\+build\+\_\+pricelist\+\_\+tab (\begin{DoxyParamCaption}\item[{ttk.\+Frame}]{parent}{}\end{DoxyParamCaption})}
+
+
+
+Construct the price list search and management interface. 
+
+Creates filters for category, model, price range, and displays search results with options to update price or publish products.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em parent} & The parent frame where the price list tab should be placed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{ui__pricelist_8py_ad9f6f9deeca70c71b6796eeb0d1dd4e5}\index{ui\_pricelist.py@{ui\_pricelist.py}!fmt\_price@{fmt\_price}}
+\index{fmt\_price@{fmt\_price}!ui\_pricelist.py@{ui\_pricelist.py}}
+\doxysubsubsection{\texorpdfstring{fmt\_price()}{fmt\_price()}}
+{\footnotesize\ttfamily \label{ui__pricelist_8py_ad9f6f9deeca70c71b6796eeb0d1dd4e5} 
+ str ui\+\_\+pricelist.\+fmt\+\_\+price (\begin{DoxyParamCaption}\item[{float}]{amount}{}\end{DoxyParamCaption})}
+
+
+
+Format a numeric price into human-\/readable string. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em amount} & The price value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Formatted string, e.\+g. "{}1 234 руб."{}. 
+\end{DoxyReturn}

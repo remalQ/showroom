@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file ui_employees.py
 @brief Module to build and manage the Employees tab in the Auto Showroom UI.
 """
@@ -13,7 +13,7 @@ from scrollable_tab import make_scrollable_tab
 
 
 def build_employee_tab(parent: ttk.Frame) -> None:
-    """
+    """!
     \brief Construct the employee management interface.
 
     Builds a scrollable frame containing a form to add new employees
@@ -53,7 +53,7 @@ def build_employee_tab(parent: ttk.Frame) -> None:
     combobox_dept.grid(row=1, column=1, sticky='ew', padx=5, pady=5)
 
     def add_employee_callback() -> None:
-        """
+        """!
         \brief Handle adding a new employee via the form inputs.
 
         Validates input fields, inserts a new employee into the database,
@@ -121,7 +121,7 @@ def build_employee_tab(parent: ttk.Frame) -> None:
     hsb.grid(row=1, column=0, sticky='ew')
 
     def _refresh_employee_list() -> None:
-        """
+        """!
         \brief Reload and display all employees in the treeview.
         """
         for item in tree.get_children():

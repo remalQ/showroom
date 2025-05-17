@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file ui_sales.py
 @brief Module to build and manage the sales tab in the Auto Showroom UI.
 """
@@ -14,7 +14,7 @@ from scrollable_tab import make_scrollable_tab
 
 
 def build_sales_tab(parent: ttk.Frame) -> None:
-    """
+    """!
     \brief Construct the interface for selling new and used vehicles.
 
     Creates a scrollable frame with separate sections for processing sales
@@ -72,7 +72,7 @@ def build_sales_tab(parent: ttk.Frame) -> None:
     entry_price_used.grid(row=3, column=1, sticky='ew', padx=5, pady=5)
 
     def sell_used_callback() -> None:
-        """
+        """!
         \brief Process the sale of a used product.
 
         Validates input, writes sale record to the database,
@@ -145,7 +145,7 @@ def build_sales_tab(parent: ttk.Frame) -> None:
     entry_price_new.grid(row=3, column=1, sticky='ew', padx=5, pady=5)
 
     def sell_new_callback() -> None:
-        """
+        """!
         \brief Process the sale of a new product.
 
         Validates input, writes sale record to the database,

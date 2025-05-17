@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file ui_tradein.py
 @brief Module to build and manage the Trade-IN tab in the Auto Showroom UI.
 """
@@ -14,7 +14,7 @@ from scrollable_tab import make_scrollable_tab
 
 
 def build_tradein_tab(parent: ttk.Frame) -> None:
-    """
+    """!
     \brief Construct the Trade-IN interface.
 
     Creates a scrollable form for executing vehicle trade-ins, collecting
@@ -81,7 +81,7 @@ def build_tradein_tab(parent: ttk.Frame) -> None:
     price_diff_entry.grid(row=4, column=1, sticky='ew', padx=5, pady=5)
 
     def submit_tradein() -> None:
-        """
+        """!
         \brief Handle the Trade-IN submission.
 
         Validates and converts form inputs, stores the record in the database,

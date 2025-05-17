@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file ui_requests.py
 @brief Module to build and manage the service requests tab in the Auto Showroom UI.
 """
@@ -14,7 +14,7 @@ from scrollable_tab import make_scrollable_tab
 
 
 def build_request_tab(parent: ttk.Frame) -> None:
-    """
+    """!
     \brief Construct the service request management interface.
 
     Creates a scrollable frame containing a form to add new requests
@@ -78,7 +78,7 @@ def build_request_tab(parent: ttk.Frame) -> None:
     entry_status.grid(row=4, column=1, sticky='ew', padx=5, pady=5)
 
     def add_request_callback() -> None:
-        """
+        """!
         \brief Handle adding a new service request.
 
         Validates form fields, inserts a new request into the database,
@@ -148,7 +148,7 @@ def build_request_tab(parent: ttk.Frame) -> None:
     hsb.grid(row=1, column=0, sticky='ew')
 
     def _refresh() -> None:
-        """
+        """!
         \brief Refresh client/employee combos and the requests treeview.
         """
         # Load clients and employees

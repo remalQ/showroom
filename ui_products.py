@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file ui_products.py
 @brief Module to build and manage the products and categories tab in the Auto Showroom UI.
 """
@@ -13,7 +13,7 @@ from scrollable_tab import make_scrollable_tab
 
 
 def fmt_price(amount: float) -> str:
-    """
+    """!
     \brief Format a numeric price into a human-readable string.
 
     Rounds to nearest integer and adds thousand separators.
@@ -27,7 +27,7 @@ def fmt_price(amount: float) -> str:
 
 
 def build_product_tab(parent: ttk.Frame) -> None:
-    """
+    """!
     \brief Construct the products and categories management interface.
 
     Creates a scrollable frame with:
@@ -68,7 +68,7 @@ def build_product_tab(parent: ttk.Frame) -> None:
     category_entry.grid(row=0, column=1, sticky='ew', padx=5, pady=5)
 
     def add_category_callback() -> None:
-        """
+        """!
         \brief Handle adding a new product category.
         """
         name = category_entry.get().strip()
@@ -127,7 +127,7 @@ def build_product_tab(parent: ttk.Frame) -> None:
     ).grid(row=3, column=0, columnspan=2, pady=5)
 
     def add_product_callback() -> None:
-        """
+        """!
         \brief Handle adding a new product to the database.
         """
         category_name = category_combo.get()
@@ -204,7 +204,7 @@ def build_product_tab(parent: ttk.Frame) -> None:
     hsb.grid(row=1, column=0, sticky='ew')
 
     def _refresh() -> None:
-        """
+        """!
         \brief Refresh categories and product list from the database.
         """
         nonlocal category_map

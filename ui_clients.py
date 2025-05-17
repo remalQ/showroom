@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+"""!
 @file ui_clients.py
 @brief Module to build and manage the client tab in the Auto Showroom UI.
 """
@@ -13,7 +13,7 @@ from scrollable_tab import make_scrollable_tab
 
 
 def build_client_tab(parent: ttk.Frame) -> None:
-    """
+    """!
     \brief Construct the client management interface.
 
     This function creates a scrollable frame containing a form to add new clients
@@ -59,7 +59,7 @@ def build_client_tab(parent: ttk.Frame) -> None:
     combobox_type.grid(row=2, column=1, sticky='ew', padx=5, pady=5)
 
     def add_client_callback() -> None:
-        """
+        """!
         \brief Handle adding a new client via the form inputs.
 
         Validates input fields, inserts a new client into the database,
@@ -134,7 +134,7 @@ def build_client_tab(parent: ttk.Frame) -> None:
     scrollbar_h.grid(row=1, column=0, sticky='ew')
 
     def _refresh_client_list() -> None:
-        """
+        """!
         \brief Reload and display all clients in the treeview.
         """
         for item in tree.get_children():
